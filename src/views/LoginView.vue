@@ -35,11 +35,6 @@ main {
   display: grid;
 }
 
-.logo-container {
-  width: 256px;
-  height: 256px;
-}
-
 .login-group-title {
   color: v-bind(primary);
   margin: 30px;
