@@ -5,6 +5,7 @@ import { setCookie } from 'typescript-cookie'
 import MoonIcon from '@/assets/icons/MoonIcon.vue'
 import SunIcon from '@/assets/icons/SunIcon.vue'
 import { ref, watch } from 'vue'
+import LogoIcon from '@/assets/icons/LogoIcon.vue'
 
 function toggleColorScheme() {
   if (isDarkMode()) {
@@ -34,6 +35,7 @@ function changeIcon() {
 
 <template>
   <div class="nav">
+    <LogoIcon class="logo"></LogoIcon>
     <h1 class="title">IronPulse SSO</h1>
     <button @click="toggleColorScheme">
       <component :is="icon"></component>
@@ -43,7 +45,15 @@ function changeIcon() {
 
 <style scoped>
 .nav {
+  height: 40px;
   display: flex;
+  align-items: center;
+}
+
+.logo {
+  scale: 70%;
+  padding: 0;
+  margin-right: -15px;
 }
 
 .title {
