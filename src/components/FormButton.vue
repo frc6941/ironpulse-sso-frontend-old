@@ -34,6 +34,7 @@ button {
   background-color: v-bind(buttonNormal);
   font-size: 12pt;
   cursor: pointer;
+  font-weight: bold;
 }
 
 button:hover {

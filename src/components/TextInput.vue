@@ -34,7 +34,15 @@ input {
   font-size: 12pt;
 }
 
-.input:focus {
+input:focus {
   border-color: #409eff;
+}
+
+input[type=password] {
+  letter-spacing: 4px;
+}
+
+input[type=password]::placeholder {
+  letter-spacing: 0;
 }
 </style>
