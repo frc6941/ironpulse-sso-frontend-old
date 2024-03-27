@@ -10,6 +10,8 @@ export const colorScheme: ColorSchemes = {
     background: '#F5F5F7',
     primary: '#000000',
     secondaryBackground: '#FFFFFF',
+    selectOptionsBackground: '#FFFFFF',
+    selectOptionsHover: '#f5f5f5',
     buttonNormal: '#E9E8EC',
     buttonHover: '#dedce2',
     buttonClick: '#d5d2d8'
@@ -18,6 +20,8 @@ export const colorScheme: ColorSchemes = {
     background: '#010101',
     primary: '#FFFFFF',
     secondaryBackground: '#1C1C1E',
+    selectOptionsBackground: '#000000',
+    selectOptionsHover: '#363636',
     buttonNormal: '#2C2C2E',
     buttonHover: '#242426',
     buttonClick: '#202020'
@@ -54,5 +58,7 @@ interface ColorScheme {
   secondaryBackground: string,
   buttonNormal: string,
   buttonHover: string,
-  buttonClick: string
+  buttonClick: string,
+  selectOptionsBackground: string,
+  selectOptionsHover: string
 }

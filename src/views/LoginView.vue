@@ -4,7 +4,6 @@ import CheckBox from '@/components/CheckBox.vue'
 import FormButton from '@/components/FormButton.vue'
 import { currentColorScheme, getColorScheme } from '@/main'
 import { ref, watch } from 'vue'
-import SelectInput from '@/components/SelectInput.vue'
 
 const primary = ref(currentColorScheme.value.primary)
 const secondaryBackground = ref(currentColorScheme.value.secondaryBackground)
@@ -14,8 +13,6 @@ watch(currentColorScheme, (current) => {
   secondaryBackground.value = current.secondaryBackground
 })
 document.body.style.backgroundColor = getColorScheme().background
-
-const selected = ref(undefined)
 </script>
 
 <template>
@@ -27,7 +24,6 @@ const selected = ref(undefined)
         <TextInput class="input" placeholder="Password" type="password"></TextInput>
       </div>
       <CheckBox class="checkbox" message="Remember me"></CheckBox>
-      <SelectInput v-model:selected="selected" :options="['Apple', 'Banana', 'Strawberry']" placeholder="Choose a fruit"></SelectInput>
       <FormButton class="button" text="Login"></FormButton>
     </div>
   </main>

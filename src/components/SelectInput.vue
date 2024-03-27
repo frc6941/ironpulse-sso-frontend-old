@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import ChevronDownIcon from '@/assets/icons/ChevronDownIcon.vue'
+import CheckMarkIcon from '@/assets/icons/CheckMarkIcon.vue'
+import { currentColorScheme } from '@/main'
 
 defineProps<{
   placeholder: '',
@@ -18,18 +20,29 @@ function toggleShowOptions() {
 function selectOption(option: string) {
   selected.value = option
 }
+
+const selectOptionsBackground = ref(currentColorScheme.value.selectOptionsBackground)
+const selectOptionsHover = ref(currentColorScheme.value.selectOptionsHover)
+
+watch(currentColorScheme, (current) => {
+  selectOptionsBackground.value = current.selectOptionsBackground
+  selectOptionsHover.value = current.selectOptionsHover
+})
 </script>
 
 <template>
-  <div class="custom-select" @click="toggleShowOptions">
+  <div class="select" @click="toggleShowOptions">
     <div class="selected-option">
       <p>{{ selected ? selected : placeholder }}</p>
       <ChevronDownIcon class="chevron-down" :class="{ 'roll-chevron': showOptions, 'roll-back-chevron': !showOptions }"></ChevronDownIcon>
     </div>
     <transition name="bounce">
-      <ul class="options" v-if="showOptions">
+      <ul id="select-options" class="options" v-if="showOptions">
         <li v-for="(option, index) in options" :key="index" @click="selectOption(option)">
-          <div><p>{{ option }}</p></div>
+          <div class="option-content">
+            <p>{{ option }}</p>
+            <CheckMarkIcon class="checkmark" v-if="option === selected"></CheckMarkIcon>
+          </div>
         </li>
       </ul>
     </transition>
@@ -71,7 +84,16 @@ function selectOption(option: string) {
   }
 }
 
-.custom-select {
+.option-content {
+  display: flex;
+}
+
+.checkmark {
+  scale: 70%;
+  margin-left: auto;
+}
+
+.select {
   position: relative;
   cursor: pointer;
   width: 200px;
@@ -79,7 +101,7 @@ function selectOption(option: string) {
 
 .selected-option {
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #979797;
   border-radius: 5px;
   display: flex;
   align-items: last baseline;
@@ -99,7 +121,7 @@ function selectOption(option: string) {
   padding: 0;
   margin: 0;
   border-radius: 8px;
-  background-color: white;
+  background-color: v-bind(selectOptionsBackground);
   box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
 }
 
@@ -112,7 +134,7 @@ function selectOption(option: string) {
 }
 
 .options div:hover {
-  background-color: #f5f5f5;
+  background-color: v-bind(selectOptionsHover);
 }
 
 p {
