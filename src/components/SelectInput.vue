@@ -2,25 +2,32 @@
 import { ref } from 'vue'
 
 defineProps<{
-  placeholder: ''
+  placeholder: '',
+  options: [string]
 }>()
+
+const selected = defineModel<string>('selected')
 
 const showOptions = ref(false)
 
 function toggleShowOptions() {
   showOptions.value = !showOptions.value
 }
+
+function selectOption(option: string) {
+  selected.value = option
+}
 </script>
 
 <template>
   <div class="custom-select" @click="toggleShowOptions">
     <div class="selected-option">
-      <p>{{ placeholder }}</p>
+      <p>{{ selected ? selected : placeholder }}</p>
     </div>
     <ul class="options" v-show="showOptions">
-      <li><div><p>Apple</p></div></li>
-      <li><div><p>Banana</p></div></li>
-      <li><div><p>Strawberry</p></div></li>
+      <li v-for="(option, index) in options" :key="index" @click="selectOption(option)">
+        <div><p>{{ option }}</p></div>
+      </li>
     </ul>
   </div>
 </template>

@@ -14,6 +14,8 @@ watch(currentColorScheme, (current) => {
   secondaryBackground.value = current.secondaryBackground
 })
 document.body.style.backgroundColor = getColorScheme().background
+
+const selected = ref(undefined)
 </script>
 
 <template>
@@ -25,6 +27,7 @@ document.body.style.backgroundColor = getColorScheme().background
         <TextInput class="input" placeholder="Password" type="password"></TextInput>
       </div>
       <CheckBox class="checkbox" message="Remember me"></CheckBox>
+      <SelectInput v-model:selected="selected" :options="['Apple', 'Banana', 'Strawberry']" placeholder="Choose a fruit"></SelectInput>
       <FormButton class="button" text="Login"></FormButton>
     </div>
   </main>
