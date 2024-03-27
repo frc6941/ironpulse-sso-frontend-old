@@ -14,7 +14,7 @@ watch(currentColorScheme, (current) => {
 
 <template>
   <div class="checkbox">
-    <input type="checkbox">
+    <input type="checkbox"/>
     <p>{{ message }}</p>
   </div>
 </template>
