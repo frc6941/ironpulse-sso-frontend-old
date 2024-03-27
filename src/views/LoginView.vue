@@ -4,6 +4,7 @@ import CheckBox from '@/components/CheckBox.vue'
 import FormButton from '@/components/FormButton.vue'
 import { currentColorScheme, getColorScheme } from '@/main'
 import { ref, watch } from 'vue'
+import SelectInput from '@/components/SelectInput.vue'
 
 const primary = ref(currentColorScheme.value.primary)
 const secondaryBackground = ref(currentColorScheme.value.secondaryBackground)
