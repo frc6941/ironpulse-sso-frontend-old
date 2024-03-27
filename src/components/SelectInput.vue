@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import ChevronDownIcon from '@/assets/icons/ChevronDownIcon.vue'
 
 defineProps<{
   placeholder: '',
@@ -23,16 +24,53 @@ function selectOption(option: string) {
   <div class="custom-select" @click="toggleShowOptions">
     <div class="selected-option">
       <p>{{ selected ? selected : placeholder }}</p>
+      <ChevronDownIcon class="chevron-down" :class="{ 'roll-chevron': showOptions, 'roll-back-chevron': !showOptions }"></ChevronDownIcon>
     </div>
-    <ul class="options" v-show="showOptions">
-      <li v-for="(option, index) in options" :key="index" @click="selectOption(option)">
-        <div><p>{{ option }}</p></div>
-      </li>
-    </ul>
+    <transition name="bounce">
+      <ul class="options" v-if="showOptions">
+        <li v-for="(option, index) in options" :key="index" @click="selectOption(option)">
+          <div><p>{{ option }}</p></div>
+        </li>
+      </ul>
+    </transition>
   </div>
 </template>
 
 <style scoped>
+
+.roll-chevron {
+  transform: rotate(0);
+  transition: transform 0.3s;
+}
+
+.roll-back-chevron {
+  transform: rotate(180deg);
+  transition: transform 0.3s;
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.3s;
+}
+
+.bounce-leave-active {
+  animation: bounce-in 0.3s reverse;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+    transform-origin: top;
+  }
+  50% {
+    transform: scale(1.1);
+    transform-origin: top;
+  }
+  100% {
+    transform: scale(1);
+    transform-origin: top;
+  }
+}
+
 .custom-select {
   position: relative;
   cursor: pointer;
@@ -43,6 +81,13 @@ function selectOption(option: string) {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  display: flex;
+  align-items: last baseline;
+}
+
+.chevron-down {
+  margin-left: auto;
+  scale: 70%;
 }
 
 .options {
