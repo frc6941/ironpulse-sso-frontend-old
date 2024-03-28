@@ -35,6 +35,7 @@ button {
   font-size: 12pt;
   cursor: pointer;
   font-weight: bold;
+  user-select: none;
 }
 
 button:hover {

@@ -39,6 +39,7 @@ main {
 .login-group-title {
   color: v-bind(primary);
   margin: 30px;
+  user-select: none;
 }
 
 @media screen and (width <= 800px) {

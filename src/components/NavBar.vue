@@ -35,8 +35,12 @@ function changeIcon() {
 
 <template>
   <div class="nav">
-    <LogoIcon class="logo"></LogoIcon>
-    <h1 class="title">IronPulse SSO</h1>
+    <RouterLink to="/login">
+      <LogoIcon class="logo"></LogoIcon>
+    </RouterLink>
+    <RouterLink to="/login">
+      <h1 class="title">IronPulse SSO</h1>
+    </RouterLink>
     <button @click="toggleColorScheme">
       <component :is="icon"></component>
     </button>
@@ -44,6 +48,14 @@ function changeIcon() {
 </template>
 
 <style scoped>
+* {
+  user-select: none;
+}
+
+a:link {
+  text-decoration: none;
+}
+
 .nav {
   height: 40px;
   display: flex;

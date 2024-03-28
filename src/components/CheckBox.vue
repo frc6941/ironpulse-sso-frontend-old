@@ -73,6 +73,7 @@ p {
   padding: 0;
   margin: 0;
   color: #767676;
+  user-select: none;
 }
 
 .checkbox {

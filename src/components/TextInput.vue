@@ -32,6 +32,7 @@ input {
 ::-webkit-input-placeholder {
   color: #979797;
   font-size: 12pt;
+  user-select: none;
 }
 
 input:focus {
