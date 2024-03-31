@@ -2,7 +2,7 @@
 import TextInput from '@/components/TextInput.vue'
 import CheckBox from '@/components/CheckBox.vue'
 import FormButton from '@/components/FormButton.vue'
-import { currentColorScheme, getColorScheme } from '@/main'
+import { baseUrl, currentColorScheme, getColorScheme } from '@/main'
 import { ref, watch } from 'vue'
 
 const primary = ref(currentColorScheme.value.primary)
@@ -13,6 +13,26 @@ watch(currentColorScheme, (current) => {
   secondaryBackground.value = current.secondaryBackground
 })
 document.body.style.backgroundColor = getColorScheme().background
+
+const loginForm = {
+  username: ref(''),
+  password: ref('')
+}
+
+const login = async () => {
+  const response = await fetch(baseUrl + '/user/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(loginForm)
+  })
+
+  if (response.ok) {
+    const data = await response.json()
+    localStorage.setItem('token', data.token)
+  } else {
+    console.error('Login failed')
+  }
+}
 </script>
 
 <template>
@@ -20,11 +40,21 @@ document.body.style.backgroundColor = getColorScheme().background
     <div class="login-group">
       <h1 class="login-group-title">Sign in with IronPulse ID</h1>
       <div class="login-group-form">
-        <TextInput class="input" placeholder="IronPulse ID" type="text"></TextInput>
-        <TextInput class="input" placeholder="Password" type="password"></TextInput>
+        <TextInput
+          class="input"
+          v-model="loginForm.username"
+          placeholder="IronPulse ID"
+          type="text"
+        ></TextInput>
+        <TextInput
+          class="input"
+          v-model="loginForm.password"
+          placeholder="Password"
+          type="password"
+        ></TextInput>
       </div>
       <CheckBox class="checkbox" message="Remember me"></CheckBox>
-      <FormButton class="button" text="Login"></FormButton>
+      <FormButton class="button" text="Login" @click="login"></FormButton>
     </div>
   </main>
 </template>
@@ -68,13 +98,17 @@ main {
 }
 
 @media screen and (width <= 800px) {
-  .login-group-form, .checkbox, .button {
+  .login-group-form,
+  .checkbox,
+  .button {
     width: 300px;
   }
 }
 
 @media screen and (width > 800px) {
-  .login-group-form, .checkbox, .button {
+  .login-group-form,
+  .checkbox,
+  .button {
     width: 300px;
   }
 }
@@ -86,11 +120,6 @@ main {
 .login-group-form {
   display: flex;
   flex-direction: column;
-  gap: 35px;
-}
-
-.input {
-  height: 55px;
-  background-color: v-bind(secondaryBackground);
+  gap: 25px;
 }
 </style>

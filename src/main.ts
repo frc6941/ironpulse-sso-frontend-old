@@ -37,6 +37,8 @@ export function getColorScheme() {
   return colorScheme.light
 }
 
+export const baseUrl = ''
+
 export function isDarkMode() {
   return getCookie('scheme') === 'dark'
 }
@@ -48,17 +50,17 @@ app.use(router)
 app.mount('#app')
 
 interface ColorSchemes {
-  light: ColorScheme,
+  light: ColorScheme
   dark: ColorScheme
 }
 
 interface ColorScheme {
-  background: string,
-  primary: string,
-  secondaryBackground: string,
-  buttonNormal: string,
-  buttonHover: string,
-  buttonClick: string,
-  selectOptionsBackground: string,
+  background: string
+  primary: string
+  secondaryBackground: string
+  buttonNormal: string
+  buttonHover: string
+  buttonClick: string
+  selectOptionsBackground: string
   selectOptionsHover: string
 }
